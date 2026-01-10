@@ -10,7 +10,7 @@ import { generateHtml } from "./template.js";
 // 常量
 const APPROVED = "APPROVED";
 const CANCELLED = "CANCELLED";
-const TIMEOUT_MS = 300000;
+const TIMEOUT_MS = 1800000; // 30 分钟
 const THEME = process.env.HOLD_ON_THEME || "auto"; // auto, light, dark
 
 // 类型定义
