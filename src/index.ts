@@ -19,8 +19,14 @@ type ContentItem = { type: "text"; text: string } | { type: "image"; data: strin
 
 // 工具函数
 function openBrowser(url: string): void {
-  const cmd = platform() === "darwin" ? "open" : platform() === "win32" ? "start" : "xdg-open";
-  exec(`${cmd} "${url}"`);
+  const os = platform();
+  if (os === "darwin") {
+    exec(`open "${url}"`);
+  } else if (os === "win32") {
+    exec(`start "" "${url}"`);
+  } else {
+    exec(`xdg-open "${url}"`);
+  }
 }
 
 function parseBase64Image(dataUrl: string): { data: string; mimeType: string } | null {
