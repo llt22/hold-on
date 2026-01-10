@@ -1,0 +1,45 @@
+{
+  "name": "hold-on-mcp",
+  "version": "2.0.0",
+  "description": "AI 交互栅栏 MCP 工具，强制 AI 停下来听你说话",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "hold-on-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "ai",
+    "windsurf",
+    "cursor",
+    "claude",
+    "model-context-protocol"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/llt22/hold-on.git"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "ws": "^8.19.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/ws": "^8.18.1",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
+  }
+}
