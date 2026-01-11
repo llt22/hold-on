@@ -1,6 +1,6 @@
 {
   "name": "hold-on-mcp",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "AI 交互栅栏 MCP 工具，强制 AI 停下来听你说话",
   "type": "module",
   "main": "dist/index.js",

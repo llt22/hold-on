@@ -10,6 +10,7 @@ import { generateHtml } from "./template.js";
 // 常量
 const APPROVED = "APPROVED";
 const CANCELLED = "CANCELLED";
+const CONVERSATION_END = "CONVERSATION_END";
 const TIMEOUT_MS = 1800000; // 30 分钟
 const THEME = process.env.HOLD_ON_THEME || "auto"; // auto, light, dark
 
@@ -47,8 +48,12 @@ function buildFeedbackResponse(
   feedback: FeedbackResult,
   cancelMsg: string,
   approveMsg: string,
-  adjustPrefix: string
+  adjustPrefix: string,
+  endMsg: string
 ) {
+  if (feedback.text === CONVERSATION_END) {
+    return formatResponse(endMsg);
+  }
   if (feedback.text === CANCELLED) {
     return formatResponse(cancelMsg);
   }
@@ -87,10 +92,13 @@ function getUserFeedback(prompt: string): Promise<FeedbackResult> {
           res.end('{"ok":true}');
           try {
             const data = JSON.parse(body);
-            done(data.action === "cancel" 
-              ? { text: CANCELLED, images: [] }
-              : { text: data.text?.trim() || APPROVED, images: data.images || [] }
-            );
+            if (data.action === "end") {
+              done({ text: CONVERSATION_END, images: [] });
+            } else if (data.action === "cancel") {
+              done({ text: CANCELLED, images: [] });
+            } else {
+              done({ text: data.text?.trim() || APPROVED, images: data.images || [] });
+            }
           } catch {
             done({ text: APPROVED, images: [] });
           }
@@ -151,7 +159,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     return buildFeedbackResponse(feedback, 
       "⏹️ 用户取消了操作。",
       "✅ 用户确认满意，任务完成。",
-      "🔄 用户要求调整："
+      "🔄 用户要求调整：",
+      "🏁 用户结束对话，无需再调用 request_approval。"
     );
   }
 

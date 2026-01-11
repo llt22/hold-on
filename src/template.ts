@@ -359,7 +359,7 @@ function confirm() {
 }
 
 function cancel() {
-  submit({ action: 'cancel', text: '', images: [] });
+  submit({ action: 'end', text: '', images: [] });
 }
 
 // Keyboard shortcuts
@@ -428,7 +428,7 @@ export function generateHtml(prompt: string, theme: string = "auto"): string {
       </div>
 
       <div class="footer">
-        <button class="btn-cancel" onclick="cancel()">取消</button>
+        <button class="btn-cancel" onclick="cancel()">结束对话</button>
         <button class="btn-confirm" onclick="confirm()">确认并继续</button>
       </div>
     </div>
