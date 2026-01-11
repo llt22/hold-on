@@ -11,6 +11,7 @@ export const CSS = `
   --input-focus-ring: rgba(37, 99, 235, 0.2);
   --prompt-bg: #f8fafc;
   --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --btn-cancel-hover-bg: #f3f4f6;
 }
 
 [data-theme="dark"] {
@@ -25,6 +26,7 @@ export const CSS = `
   --input-focus-ring: rgba(59, 130, 246, 0.3);
   --prompt-bg: #0f172a;
   --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+  --btn-cancel-hover-bg: #334155;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
@@ -237,7 +239,7 @@ button {
 }
 
 .btn-cancel:hover {
-  background: #f3f4f6;
+  background: var(--btn-cancel-hover-bg);
   color: var(--text-main);
 }
 
