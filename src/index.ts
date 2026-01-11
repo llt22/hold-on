@@ -153,8 +153,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     if (!desc) return formatResponse("❌ 错误：action_description 不能为空");
     
     console.error(`[HoldOn] 请求用户确认: ${desc}`);
-    const prompt = `AI 已完成以下输出：\n\n${desc}\n\n满意请留空点确认，否则输入调整指令：`;
-    const feedback = await getUserFeedback(prompt);
+    const feedback = await getUserFeedback(desc);
     
     return buildFeedbackResponse(feedback, 
       "⏹️ 用户取消了操作。",
